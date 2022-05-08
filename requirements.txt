@@ -1,0 +1,12 @@
+torch==1.7.1
+pytorch-lightning==1.0.8
+indic-nlp-library==0.81
+sacrebleu==2.0.0
+sacremoses==0.0.43
+transformers==4.9.2
+tqdm==4.48.2
+wandb==0.12.4
+urduhack==1.1.1
+unidecode==1.2.0
+sentencepiece==0.1.91
+light-the-torch==0.3.5
