@@ -147,6 +147,14 @@ GAT-Transformer|29.54|17.94|4.91|7.19|40.33|11.34|30.15|5.08|18.31
 Vanilla Transformer |35.42|17.31|6.94|8.82|38.87|13.21|35.61|3.16|19.92
 mT5-small |40.61|20.23|11.39|13.61|43.65|16.61|45.28|8.77|**25.02**
 
+## Contributors
+- Tushar Abhishek 
+- Shivprasad Sagare
+- Bhavyajeet Singh
+- Anubhav Sharma
+- Manish Gupta
+- Vasudeva Varma
+
 ## Citation
 One can cite our [paper](https://arxiv.org/abs/2202.00291) as follows:
 
