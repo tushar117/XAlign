@@ -103,10 +103,10 @@ where,
 - `learning_rate` must be '1e-5' for 'xlm-roberta-large' or '2e-5' for 'google/muril-large-cased'
 
 ## Cross-lingual Alignment Results
-Following are the results for cross-lingual alignment over gold standard test datasets.
-|| | | | | F1-score | | | | |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
+Following are the F1-score for cross-lingual alignment over gold standard test datasets.
+<!-- || | | | | F1-score | | | | | -->
 | | Hindi | Marathi | Telugu| Tamil | English | Gujarati | Bengali | Kannada | Average |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | **Baselines** | | | | | | | | | |
 |[KELM-style](https://aclanthology.org/2021.naacl-main.278/) |49.3|42.6|36.8|45.1|41.0|37.2|43.6|33.8|41.1
 |[WITA-style](https://aclanthology.org/2020.emnlp-main.738/) |50.7|57.4|51.7|45.9|60.2|50.0|53.5|53.0|52.8
