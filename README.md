@@ -7,8 +7,6 @@ We explored two different unsupervised methods to solve cross-lingual alignment 
 - Transfer learning from NLI
 - Distant supervision from another English-only dataset
 
-We introduce a large collection of high quality XF2T dataset in 7 languages: Hindi, Marathi, Gujarati, Telugu, Tamil, Kannada, Bengali, and monolingual dataset in English.
-
 This repository consists of steps for executing the cross-lingual alignment approaches and finetuning mT5 for data-to-text generation on XAlign. One can find more details, analyses, and baseline results in [our paper](https://arxiv.org/abs/2202.00291).
 
 ## Installation
@@ -16,10 +14,75 @@ Install the required packgaes as follow:
 ```
 pip install -r requirements.txt
 ```
-
 ## Dataset
-This dataset is available upon request, and one can get the dataset by sharing a short description of how you will use the data and your affiliation to Tushar Abhishek (tushar.abhishek@research.iiit.ac.in).
 
+### Dataset releases
+- v2.0 (Sep 2022): Extended to four additional languages: Punjabi (pa), Malayalam (ml), Assamese (as) and Oriya (or). 
+- v1.0 (Apr 2022): Introduced the cross-lingual data-to-text into 8 langauges: Hindi (hi), Marathi (mr), Gujarati (gu), Telugu (te), Tamil (ta), Kannada (kn), Bengali (bn), and monolingual dataset in English (en).
+
+### Data Fields
+
+Each record consist of the following entries:
+
+- sentence (string) : Native language wikipedia sentence. (non-native language strings were removed.)
+- `facts` (List[Dict]) : List of facts associated with the sentence where each fact is stored as dictionary.
+- language (string) : Language identifier.
+
+The `facts` key contains list of facts where each facts is stored as dictionary. A single record within fact list contains following entries:
+
+- subject (string) : central entity.
+- object (string) : entity or a piece of information about the subject.
+- predicate (string) : relationship that connects the subject and the object.
+- qualifiers (List[Dict]) : It provide additional information about the fact, is stored as list of qualifier where each record is a dictionary. The dictionary contains two keys: qualifier_predicate to represent property of qualifer and qualifier_object to store value for the qualifier's predicate.
+
+### Data Instances
+Example from English
+```
+{
+  "sentence": "Mark Paul Briers (born 21 April 1968) is a former English cricketer.",
+  "facts": [
+    {
+      "subject": "Mark Briers",
+      "predicate": "date of birth",
+      "object": "21 April 1968",
+      "qualifiers": []
+    },
+    {
+      "subject": "Mark Briers",
+      "predicate": "occupation",
+      "object": "cricketer",
+      "qualifiers": []
+    },
+    {
+      "subject": "Mark Briers",
+      "predicate": "country of citizenship",
+      "object": "United Kingdom",
+      "qualifiers": []
+    }
+  ],
+  "language": "en"
+}
+```
+Example from one of the low-resource languages (i.e. Hindi)
+```
+{
+  "sentence": "बोरिस पास्तेरनाक १९५८ में साहित्य के क्षेत्र में नोबेल पुरस्कार विजेता रहे हैं।",
+  "facts": [
+    {
+      "subject": "Boris Pasternak",
+      "predicate": "nominated for",
+      "object": "Nobel Prize in Literature",
+      "qualifiers": [
+        {
+          "qualifier_predicate": "point in time",
+          "qualifier_object": "1958"
+        }
+      ]
+    }
+  ],
+  "language": "hi"
+}
+```
 
 ### Gold standard Test dataset
 We manually annotated the test dataset across 8 languages with the help of crowd-sourced annotators.
@@ -33,7 +96,11 @@ Tamil|656|9.5/5/24|1.9/1/8
 English|470|17.5/8/61|2.7/1/7
 Gujarati|530|12.7/6/31|2.1/1/6
 Bengali|792|8.7/5/24|1.6/1/5
-Kannada|642|10.4/6/45|2.2/1/7 
+Kannada|642|10.4/6/45|2.2/1/7
+Oriya|529|13.4/5/45|2.4/1/7
+Assamese|637|16.22/5/72|2.2/1/9
+Malayalam|615|9.2/6/24|1.8/1/5
+Punjabi|529|13.4/5/45|2.4/1/7
 
 
 ### Train and validation dataset (automatically aligned)
@@ -49,6 +116,10 @@ English|132584|20.2/4/86|2.2/1/10|
 Gujarati|9031|23.4/5/99|1.8/1/10|
 Bengali|121216|19.3/5/99|2.0/1/10|
 Kannada|25441|19.3/5/99|1.9/1/10|
+Oriya|14333|16.88/5/99|1.7/1/10|
+Assamese|9707|19.23/5/99|1.6/1/10|
+Malayalam|55135|15.7/5/98|1.9/1/10|
+Punjabi|30136|32.1/5/99	2.1/1/10|
 
 ## Cross-lingual Alignment Approaches
 
